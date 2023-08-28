@@ -6,9 +6,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Main {
-    private static final String POST_URL = "http://localhost:8080/loginValidate";
-    private static final String POST_PARAMS = "username=dude&password=dude";
-    private static String sendPOST() throws IOException {
+
+
+    private static String sendPOST(String username, String password) throws IOException {
+        String POST_PARAMS = "username="+username+"&password="+password;
+        String POST_URL = "http://localhost:8080/loginValidate";
         URL url = new URL(POST_URL);
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
         httpURLConnection.setRequestMethod("POST");
@@ -46,10 +48,10 @@ public class Main {
     }
 
     private static void MrBrute(){
-        
+
     }
 
     public static void main(String[] args) throws IOException {
-        sendPOST();
+        sendPOST("dude","dude");
     }
 }
