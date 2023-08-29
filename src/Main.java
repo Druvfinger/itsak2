@@ -9,9 +9,12 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
 
+    static int count = 0;
+    static String username = "dude";
+
 
     private static String sendPOST(String username, String password) throws IOException {
-        String POST_PARAMS = "username="+username+"&password="+password;
+        String POST_PARAMS = "username=" + username + "&password=" + password;
         String POST_URL = "http://localhost:8080/loginValidate";
         URL url = new URL(POST_URL);
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -24,22 +27,23 @@ public class Main {
         outputStream.close();
 
         int responseCode = httpURLConnection.getResponseCode();
-        System.out.println("POST Response Code ::" + responseCode);
+        System.out.println("POST Response Code :" + responseCode);
 
         if (responseCode == HttpURLConnection.HTTP_OK) {
             BufferedReader in = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
             String inputLine;
             StringBuilder response = new StringBuilder();
 
-            while ((inputLine = in .readLine()) != null) {
+            while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
-            } in .close();
+            }
+            in.close();
 
-            if (response.toString().contains("welcome")){
-                System.out.println("success");
+            if (response.toString().contains("welcome")) {
+                //System.out.println("success");
                 return "success";
-            }else {
-                System.out.println("denied");
+            } else {
+                //System.out.println("denied");
                 return "denied";
             }
             //System.out.println(response);
